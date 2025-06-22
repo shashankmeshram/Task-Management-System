@@ -155,6 +155,25 @@ const chngStatus = async (req, res) => {
   }
 };
 
+const updateTask = async (req, res) => {
+  const { _id, title, description, complDay, status } = req.body;
+
+  try {
+    const updatedTask = await taskModel.findByIdAndUpdate(
+      _id,
+      { title, description, complDay, status },
+      { new: true }
+    );
+    if (!updatedTask) {
+      return res.status(404).send({ msg: "Task not found" });
+    }
+    res.status(200).send({ msg: "Task updated successfully", task: updatedTask });
+  } catch (err) {
+    console.error("❌ Update Task Error:", err);
+    res.status(500).send({ msg: "Failed to update task" });
+  }
+};
+
 module.exports = {
   adminLogin,
   createUser,
@@ -163,4 +182,5 @@ module.exports = {
   deleteTask,
   taskShow,
   chngStatus,
+  updateTask,
 };

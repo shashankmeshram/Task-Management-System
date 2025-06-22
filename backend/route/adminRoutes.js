@@ -8,4 +8,7 @@ route.post("/assignTask",adminController.assignTask)
 route.get("/allTasks",adminController.taskShow)
 route.get("/chngStatus",adminController.chngStatus)
 route.delete("/deleteTask",adminController.deleteTask)
+route.put("/updateTask", adminController.updateTask)
+
+
 module.exports=route;
